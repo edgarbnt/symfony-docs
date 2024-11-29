@@ -81,6 +81,35 @@ Generates the URI of :ref:`a fragment <fragments-path-config>`.
 .. versionadded:: 5.3
 
     The ``fragment_uri()`` function was introduced in Symfony 5.3.
+Example 1
+
+.. code-block:: twig
+
+    {{ fragment_uri(controller('App\\Controller\\HomeController::index'), 
+        absolute = true, strict = true, sign = true) }}
+
+Output:
+
+.. code-block:: html
+
+    <a href="https://example.com/_fragment?_path=_controller=App%5CController%5CHomeController%3A%3Aindex&_hash=abcdef123456">
+        https://example.com/_fragment?_path=_controller=App%5CController%5CHomeController%3A%3Aindex&_hash=abcdef123456
+    </a>
+
+Example 2
+
+.. code-block:: twig
+
+    {{ fragment_uri(controller('App\\Controller\\UserController::profile', 
+        { 'id': 42 }), absolute = false, strict = false, sign = false) }}
+
+Output:
+
+.. code-block:: html
+
+    <a href="/_fragment?_path=_controller=App%5CController%5CUserController%3A%3Aprofile&id=42">
+        /_fragment?_path=_controller=App%5CController%5CUserController%3A%3Aprofile&id=42
+    </a>
 
 controller
 ~~~~~~~~~~
@@ -101,6 +130,21 @@ like :ref:`render() <reference-twig-function-render>` and
 :ref:`render_esi() <reference-twig-function-render-esi>`.
 
 .. _reference-twig-function-asset:
+
+.. code-block:: twig
+
+    {% set myArray = {'a': 'foo', 'b': 'bar'} %}
+
+    <iframe src="{{ render(controller('App\\Controller\\MyController::baz', {'myArray': myArray})) }}"></iframe>
+
+Output:
+
+.. code-block:: html
+
+    <iframe src="<ul>
+        <li>foo</li>
+        <li>bar</li>
+    </ul>"></iframe>
 
 asset
 ~~~~~
@@ -156,6 +200,11 @@ csrf_token
 
 Renders a CSRF token. Use this function if you want :doc:`CSRF protection </security/csrf>`
 in a regular HTML form not managed by the Symfony Form component.
+
+.. code-block:: twig
+
+	{{ csrf_token(intention = 'my_form') }}
+    {# output: generates a variable token #}
 
 is_granted
 ~~~~~~~~~~
@@ -532,6 +581,28 @@ Generates an excerpt of a code file around the given ``line`` number. The
 ``srcContext`` argument defines the total number of lines to display around the
 given line number (use ``-1`` to display the whole file).
 
+Let's assume this is the content of a file :
+
+.. code-block:: text
+
+    a
+    b
+    c
+    d
+    e
+
+.. code-block:: twig
+
+    {{ "/path/to/file/file.txt"|file_excerpt(line = 4, srcContext = 1) }}
+    {# output:
+        3.c
+        4.d
+        5.e #}
+
+    {{ "/path/to/file/file.txt"|file_excerpt(line = 1, srcContext = 0) }}
+    {# output:
+        1.a #}
+
 format_file
 ~~~~~~~~~~~
 
@@ -549,6 +620,36 @@ format_file
 Generates the file path inside an ``<a>`` element. If the path is inside
 the kernel root directory, the kernel root directory path is replaced by
 ``kernel.project_dir`` (showing the full path in a tooltip on hover).
+
+Example 1
+
+.. code-block:: twig
+
+    {{ "path/to/file/file.txt"|format_file(line = 1, text = "my_text") }}
+
+Output:
+
+.. code-block:: html
+
+    <a href="path/to/file/file.txt#L1" 
+        title="Click to open this file" class="file_link">my_text at line 1
+    </a>
+
+Example 2
+
+.. code-block:: twig
+
+    {{ "path/to/file/file.txt"|format_file(line = 3) }}
+
+Output:
+
+.. code-block:: html
+
+    <a href="path/to/file/file.txt#L3" 
+        title="Click to open this file" class="file_link">
+        <abbr title="path/to/file/file.txt">file.txt</abbr>
+        / at line 3
+    </a>
 
 format_file_from_text
 ~~~~~~~~~~~~~~~~~~~~~
