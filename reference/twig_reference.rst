@@ -81,33 +81,6 @@ Generates the URI of :ref:`a fragment <fragments-path-config>`.
 .. versionadded:: 5.3
 
     The ``fragment_uri()`` function was introduced in Symfony 5.3.
-Example 1
-
-.. code-block:: twig
-
-    {{ fragment_uri(controller('App\\Controller\\HomeController::index'), absolute = true, strict = true, sign = true) }}
-
-Output:
-
-.. code-block:: html
-
-    <a href="https://example.com/_fragment?_path=_controller=App%5CController%5CHomeController%3A%3Aindex&_hash=abcdef123456">
-        https://example.com/_fragment?_path=_controller=App%5CController%5CHomeController%3A%3Aindex&_hash=abcdef123456
-    </a>
-
-Example 2
-
-.. code-block:: twig
-
-    {{ fragment_uri(controller('App\\Controller\\UserController::profile', { 'id': 42 }), absolute = false, strict = false, sign = false) }}
-
-Output:
-
-.. code-block:: html
-
-    <a href="/_fragment?_path=_controller=App%5CController%5CUserController%3A%3Aprofile&id=42">
-        /_fragment?_path=_controller=App%5CController%5CUserController%3A%3Aprofile&id=42
-    </a>
 
 controller
 ~~~~~~~~~~
