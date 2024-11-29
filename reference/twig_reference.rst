@@ -85,8 +85,7 @@ Example 1
 
 .. code-block:: twig
 
-    {{ fragment_uri(controller('App\\Controller\\HomeController::index'),
-        absolute = true, strict = true, sign = true) }}
+    {{ fragment_uri(controller('App\\Controller\\HomeController::index'), absolute = true, strict = true, sign = true) }}
 
 Output:
 
@@ -100,8 +99,7 @@ Example 2
 
 .. code-block:: twig
 
-    {{ fragment_uri(controller('App\\Controller\\UserController::profile',
-        { 'id': 42 }), absolute = false, strict = false, sign = false) }}
+    {{ fragment_uri(controller('App\\Controller\\UserController::profile', { 'id': 42 }), absolute = false, strict = false, sign = false) }}
 
 Output:
 
