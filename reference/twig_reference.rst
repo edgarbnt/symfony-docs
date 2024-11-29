@@ -85,7 +85,7 @@ Example 1
 
 .. code-block:: twig
 
-    {{ fragment_uri(controller('App\\Controller\\HomeController::index'), 
+    {{ fragment_uri(controller('App\\Controller\\HomeController::index'),
         absolute = true, strict = true, sign = true) }}
 
 Output:
@@ -100,7 +100,7 @@ Example 2
 
 .. code-block:: twig
 
-    {{ fragment_uri(controller('App\\Controller\\UserController::profile', 
+    {{ fragment_uri(controller('App\\Controller\\UserController::profile',
         { 'id': 42 }), absolute = false, strict = false, sign = false) }}
 
 Output:
@@ -131,7 +131,7 @@ like :ref:`render() <reference-twig-function-render>` and
 
 .. _reference-twig-function-asset:
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {% set myArray = {'a': 'foo', 'b': 'bar'} %}
 
@@ -631,7 +631,7 @@ Output:
 
 .. code-block:: html
 
-    <a href="path/to/file/file.txt#L1" 
+    <a href="path/to/file/file.txt#L1"
         title="Click to open this file" class="file_link">my_text at line 1
     </a>
 
@@ -645,7 +645,7 @@ Output:
 
 .. code-block:: html
 
-    <a href="path/to/file/file.txt#L3" 
+    <a href="path/to/file/file.txt#L3"
         title="Click to open this file" class="file_link">
         <abbr title="path/to/file/file.txt">file.txt</abbr>
         / at line 3
